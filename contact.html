@@ -94,6 +94,7 @@
     <p>&copy; 2024 Empowering the Nation. All rights reserved.</p>
 </footer>
 <script src="contact.js" defer></script>
+<script src="javascript/layout.js" defer></script>
 <script>
 const validateForm=e=>{e.preventDefault();let n=document.getElementById("name").value,t=document.getElementById("email").value,a=document.getElementById("phone").value,s=document.getElementById("message").value;return n.length<2?showStatus("Please enter a valid name","error"):t.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)?a&&!a.match(/^[0-9]{10}$/)?showStatus("Please enter a valid 10-digit phone number","error"):s.length<10?showStatus("Message must be at least 10 characters long","error"):(showStatus("Thank you for your message! We will get back to you soon.","success"),document.getElementById("contactForm").reset()):showStatus("Please enter a valid email address","error"),!1},showStatus=(e,t)=>{let n=document.getElementById("formStatus");n.textContent=e,n.className=t,n.style.display="block",setTimeout(()=>{n.style.display="none"},5e3)};
 </script>
