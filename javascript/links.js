@@ -158,12 +158,48 @@
             crumb.appendChild(homeLink);
             crumb.appendChild(sep);
             crumb.appendChild(cur);
-            // style minimally (can be overridden in CSS)
-            crumb.style.fontSize = '0.95rem';
-            crumb.style.marginTop = '6px';
-            crumb.style.display = 'flex';
-            crumb.style.gap = '6px';
-            header.insertAdjacentElement('afterend', crumb);
+            // Style as a back button in top right
+            crumb.style.fontSize = '14px';
+            crumb.style.position = 'absolute';
+            crumb.style.right = '16px';
+            crumb.style.top = '50%';
+            crumb.style.transform = 'translateY(-50%)';
+            crumb.style.display = 'inline-flex';
+            crumb.style.alignItems = 'center';
+            crumb.style.padding = '8px 12px';
+            crumb.style.background = '#fff';
+            crumb.style.border = '1px solid #ccc';
+            crumb.style.borderRadius = '6px';
+            crumb.style.textDecoration = 'none';
+            crumb.style.color = '#333';
+            crumb.style.gap = '8px';
+            crumb.style.zIndex = '100';
+
+            // Make header position relative for absolute positioning of crumb
+            if (window.getComputedStyle(header).position === 'static') {
+                header.style.position = 'relative';
+            }
+
+            // Modify the breadcrumb to be a simpler back navigation
+            crumb.innerHTML = '';
+            const backLink = document.createElement('a');
+            backLink.href = document.referrer || 'home.html';
+            backLink.textContent = '← Back';
+            backLink.style.textDecoration = 'none';
+            backLink.style.color = 'inherit';
+            crumb.appendChild(backLink);
+
+            // Add hover effect
+            crumb.addEventListener('mouseenter', () => {
+                crumb.style.background = '#f0f0f0';
+                crumb.style.borderColor = '#999';
+            });
+            crumb.addEventListener('mouseleave', () => {
+                crumb.style.background = '#fff';
+                crumb.style.borderColor = '#ccc';
+            });
+
+            header.appendChild(crumb);
         }
     });
 })();
