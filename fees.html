@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fees - Empowering the Nation</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+    /* logo and header layout */
+    header { display: flex; align-items: center; gap: 12px; }
+    #logo { height: 64px; width: auto; display: block; }
+
+    .course-selector {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .course-options label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .course-options label:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+    }
+
+    .payment-selection {
+        margin: 20px 0;
+    }
+
+    #paymentOption {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+    .fee-summary {
+        margin-top: 30px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    #selectedCourses {
+        margin-bottom: 20px;
+    }
+
+    .selected-course {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 8px;
+        animation: slideIn 0.3s ease;
+    }
+
+    .total-section {
+        border-top: 2px solid #ddd;
+        padding-top: 15px;
+    }
+
+    .total-section p {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px 0;
+        font-size: 16px;
+    }
+
+    .grand-total {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #0078d4;
+    }
+
+    .fee-info {
+        margin-top: 30px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .fee-info ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .fee-info li {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .course-options {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
+</head>
+<body>
+<header>
+    <img id="logo" src="images/IMG_7186.jpg" alt="Empowering the Nation logo">
+    <h1>Empowering the Nation</h1>
+    <p>"Skill 2 Earn"</p>
+</header>
+
+<nav>
+    <a href="home.html">Home</a>
+    <a href="courses.html">Courses</a>
+    <a href="fees.html">Fees</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+
+<main>
+    <section class="fees">
+        <h2>Course Fees Overview</h2>
+        <div class="fee-structure">
+            <h3>6 Week Courses</h3>
+            <ul>
+                <li>Child minding: R750</li>
+                <li>Cooking: R750</li>
+                <li>Garden Maintenance: R750</li>
+            </ul>
+        </div>
+        <div class="fee-structure">
+            <h3>6 Month Courses</h3>
+            <ul>
+                <li>First Aid: R1500</li>
+                <li>Sewing: R1500</li>
+                <li>Landscaping: R1500</li>
+                <li>Life Skills: R1500</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="calculator" class="calculator-section">
+        <h2>Course Selection and Fee Calculator</h2>
+        <div class="course-selector">
+            <h3>6 Week Courses</h3>
+            <div class="course-options">
+                <label><input type="checkbox" name="course" value="750" data-course="Child minding"> Child minding (R750)</label>
+                <label><input type="checkbox" name="course" value="750" data-course="Cooking"> Cooking (R750)</label>
+                <label><input type="checkbox" name="course" value="750" data-course="Garden Maintenance"> Garden Maintenance (R750)</label>
+            </div>
+
+            <h3>6 Month Courses</h3>
+            <div class="course-options">
+                <label><input type="checkbox" name="course" value="1500" data-course="First Aid"> First Aid (R1500)</label>
+                <label><input type="checkbox" name="course" value="1500" data-course="Sewing"> Sewing (R1500)</label>
+                <label><input type="checkbox" name="course" value="1500" data-course="Landscaping"> Landscaping (R1500)</label>
+                <label><input type="checkbox" name="course" value="1500" data-course="Life Skills"> Life Skills (R1500)</label>
+            </div>
+
+            <div class="payment-selection">
+                <h3>Payment Option</h3>
+                <select id="paymentOption">
+                    <option value="monthly">Monthly Installments</option>
+                    <option value="upfront">Upfront Payment (10% Extra Discount)</option>
+                </select>
+            </div>
+
+            <div class="fee-summary">
+                <h3>Fee Summary</h3>
+                <div id="selectedCourses">
+                    <p>No courses selected</p>
+                </div>
+                <div class="total-section">
+                    <p>Subtotal: R<span id="subtotal">0</span></p>
+                    <p>Discount: R<span id="discount">0</span></p>
+                    <p class="grand-total">Total to Pay: R<span id="total">0</span></p>
+                </div>
+            </div>
+
+            <div class="fee-info">
+                <h3>Available Discounts</h3>
+                <ul>
+                    <li>One course - no discount</li>
+                    <li>Two courses - 5% discount</li>
+                    <li>Three courses - 10% discount</li>
+                    <li>More than three courses - 15% discount</li>
+                    <li>Upfront payment - additional 10% discount</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Empowering the Nation. All rights reserved.</p>
+</footer>
+<script src="javascript/fees.js"></script>
+</body>
+</html>
