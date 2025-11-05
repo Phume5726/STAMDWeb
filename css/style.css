@@ -9,16 +9,7 @@ body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: 
         .contact, .fees { margin-top: 30px; }
         footer { background-color: #000; color: #fff; text-align: center; padding: 10px; }
 /* Header & navigation — logo left, nav right, vertically centered */
-header.site-header {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    box-sizing: border-box;
-}
+
 
 header.site-header #logo {
     height: 64px;
