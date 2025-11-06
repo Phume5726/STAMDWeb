@@ -184,7 +184,7 @@
             crumb.innerHTML = '';
             const backLink = document.createElement('a');
             backLink.href = document.referrer || 'home.html';
-            backLink.textContent = '← Back';
+            backLink.textContent = 'Back';
             backLink.style.textDecoration = 'none';
             backLink.style.color = 'inherit';
             crumb.appendChild(backLink);
