@@ -7,6 +7,12 @@ class FeeCalculator {
         this.subtotalSpan = document.getElementById('subtotal');
         this.discountSpan = document.getElementById('discount');
         this.totalSpan = document.getElementById('total');
+        // Enrollment form elements (optional if present in the page)
+        this.enrollmentForm = document.getElementById('enrollmentForm');
+        this.nameInput = document.getElementById('studentName');
+        this.emailInput = document.getElementById('studentEmail');
+        this.phoneInput = document.getElementById('studentPhone');
+        this.formMessage = document.getElementById('formMessage');
         this.init();
     }
 
@@ -24,6 +30,10 @@ class FeeCalculator {
             this.animateTotal();
         });
 
+        // Enrollment form submit handler (if form exists)
+        if (this.enrollmentForm) {
+            this.enrollmentForm.addEventListener('submit', this.handleSubmit.bind(this));
+        }
         // Add hover effects to course options
         document.querySelectorAll('.course-options label').forEach(label => {
             label.addEventListener('mouseenter', () => this.animateHover(label));
@@ -78,6 +88,8 @@ class FeeCalculator {
 
         // Animate and update the display
         this.updateDisplay(selectedCourses, subtotal, discount, total);
+        // Show or hide enrollment form based on selection
+        this.toggleForm(selectedCourses.length > 0);
     }
 
     calculateDiscount(courseCount) {
@@ -137,6 +149,63 @@ class FeeCalculator {
         };
 
         requestAnimationFrame(updateNumber);
+    }
+
+    toggleForm(show) {
+        if (!this.enrollmentForm) return;
+        this.enrollmentForm.style.display = show ? 'block' : 'none';
+        if (!show && this.formMessage) this.formMessage.textContent = '';
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        if (!this.enrollmentForm) return;
+
+        const name = (this.nameInput && this.nameInput.value || '').trim();
+        const email = (this.emailInput && this.emailInput.value || '').trim();
+        const phone = (this.phoneInput && this.phoneInput.value || '').trim();
+
+        // Simple validation
+        if (!name) {
+            this.showFormMessage('Please enter your full name', true);
+            this.nameInput.focus();
+            return;
+        }
+
+        const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRe.test(email)) {
+            this.showFormMessage('Please enter a valid email address', true);
+            this.emailInput.focus();
+            return;
+        }
+
+        const phoneClean = phone.replace(/[^0-9+]/g, '');
+        if (!phone || phoneClean.length < 7) {
+            this.showFormMessage('Please enter a valid phone number', true);
+            this.phoneInput.focus();
+            return;
+        }
+
+        // Gather selected courses and totals for confirmation
+        const selectedCourses = Array.from(this.courseCheckboxes).filter(cb => cb.checked).map(cb => cb.dataset.course);
+        const subtotal = parseFloat(this.subtotalSpan.textContent) || 0;
+        const discount = parseFloat(this.discountSpan.textContent) || 0;
+        const total = parseFloat(this.totalSpan.textContent) || 0;
+
+        // Simulate successful submission (could be sent to server)
+        const confirmation = `Thank you ${name}!\nYou enrolled for: ${selectedCourses.join(', ')}. Total payable: R${total.toFixed(2)}. We will contact you at ${email} / ${phone}.`;
+        console.log('Enrollment submitted:', { name, email, phone, selectedCourses, subtotal, discount, total });
+        this.showFormMessage('Enrollment submitted — thank you! We will contact you shortly.', false);
+
+        // Optionally clear the form
+        this.enrollmentForm.reset();
+        // Keep form visible for confirmation; could hide after a timeout
+    }
+
+    showFormMessage(message, isError) {
+        if (!this.formMessage) return;
+        this.formMessage.textContent = message;
+        this.formMessage.style.color = isError ? '#b00020' : '#006400';
     }
 }
 

@@ -126,6 +126,42 @@
             grid-template-columns: 1fr;
         }
     }
+    /* Enrollment form styles */
+    .enrollment-form {
+        display: none;
+        margin-top: 20px;
+        padding: 16px;
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .enrollment-form label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
+
+    .enrollment-form input {
+        width: 100%;
+        padding: 8px 10px;
+        margin-bottom: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .enrollment-form button {
+        background: #0078d4;
+        color: white;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    #formMessage { margin-top: 10px; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -202,6 +238,22 @@
                     <p class="grand-total">Total to Pay: R<span id="total">0</span></p>
                 </div>
             </div>
+
+            <!-- Enrollment form: appears when at least one course is selected -->
+            <form id="enrollmentForm" class="enrollment-form" novalidate>
+                <h3>Enroll Now</h3>
+                <label for="studentName">Full name</label>
+                <input id="studentName" name="studentName" type="text" placeholder="Your full name" />
+
+                <label for="studentEmail">Email address</label>
+                <input id="studentEmail" name="studentEmail" type="email" placeholder="you@example.com" />
+
+                <label for="studentPhone">Phone number</label>
+                <input id="studentPhone" name="studentPhone" type="tel" placeholder="e.g. 071 123 4567" />
+
+                <button id="enrollBtn" type="submit">Submit Enrollment</button>
+                <div id="formMessage" role="status" aria-live="polite"></div>
+            </form>
 
             <div class="fee-info">
                 <h3>Available Discounts</h3>
