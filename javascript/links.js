@@ -201,5 +201,68 @@
 
             header.appendChild(crumb);
         }
+
+        // Inject footer social links (WhatsApp, Instagram, Email)
+        (function injectFooterSocial() {
+            const footer = document.querySelector('footer');
+            if (!footer) return;
+
+            let social = footer.querySelector('.social-links');
+            if (!social) {
+                social = document.createElement('div');
+                social.className = 'social-links';
+                social.setAttribute('aria-label', 'Follow us on social media');
+                footer.appendChild(social);
+            }
+
+            // Clear existing content to avoid duplicates when the script runs multiple times
+            social.innerHTML = '';
+
+            const icons = [
+                {
+                    href: 'https://wa.me/27123456789',
+                    label: 'Chat with us on WhatsApp',
+                    svg: `
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M20.52 3.48A11.93 11.93 0 0012 0C5.373 0 .02 5.373.02 12c0 2.116.56 4.14 1.62 5.93L0 24l6.29-1.66A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12 0-3.21-1.25-6.22-3.48-8.52z" fill="#25D366"/>
+                            <path d="M17.24 14.08c-.29-.14-1.72-.85-1.99-.95-.27-.1-.47-.14-.67.14-.2.29-.77.95-.95 1.15-.18.2-.36.22-.66.07-.3-.14-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.29-.02-.45.13-.59.13-.13.29-.36.43-.54.14-.18.18-.3.3-.5.12-.2.04-.37-.02-.51-.06-.14-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.05 1.03-1.05 2.51s1.08 2.9 1.23 3.1c.14.2 2.12 3.25 5.13 4.55 3.01 1.3 3.01.87 3.56.82.55-.05 1.78-.72 2.03-1.41.25-.69.25-1.28.18-1.41-.06-.13-.23-.2-.52-.34z" fill="#fff"/>
+                        </svg>
+                    `
+                },
+                {
+                    href: 'https://instagram.com/yourpage',
+                    label: 'Visit our Instagram',
+                    svg: `
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="#E4405F"/>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" fill="#fff"/>
+                            <circle cx="17.5" cy="6.5" r="1.2" fill="#fff"/>
+                        </svg>
+                    `
+                },
+                {
+                    href: 'mailto:info@empowerthenation.org',
+                    label: 'Send us an email',
+                    svg: `
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <rect x="2" y="4" width="20" height="16" rx="2" ry="2" fill="#fff" stroke="#333" stroke-width="0.8"/>
+                            <path d="M3 6l9 7 9-7" stroke="#333" stroke-width="0.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    `
+                }
+            ];
+
+            icons.forEach(info => {
+                const a = document.createElement('a');
+                a.href = info.href;
+                if (!info.href.startsWith('mailto:')) {
+                    a.target = '_blank';
+                    a.rel = 'noopener noreferrer';
+                }
+                a.setAttribute('aria-label', info.label);
+                a.innerHTML = info.svg;
+                social.appendChild(a);
+            });
+        })();
     });
 })();
